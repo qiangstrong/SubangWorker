@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/gray"
+    tools:context="com.subang.worker.activity.CommentActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="fill_parent"
+        android:layout_height="50.0dip"
+        android:background="@color/blue_theme">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="45.0dip"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15.0dip"
+            android:contentDescription="@null"
+            android:onClick="iv_back_onClick"
+            android:src="@drawable/back_btn" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="订单备注"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/tile_size" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_title"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <EditText
+            android:id="@+id/et_comment"
+            android:layout_width="fill_parent"
+            android:layout_height="100.0dip"
+            android:layout_gravity="center_horizontal"
+            android:background="@android:color/white"
+            android:gravity="left"
+            android:hint="您对订单的备注。"
+            android:maxLength="@integer/order_comment"
+            android:paddingLeft="10.0dip"
+            android:paddingTop="10.0dip"
+            android:textColor="#ff3e3e3e"
+            android:textCursorDrawable="@null"
+            android:textSize="14.0sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_ok"
+        android:layout_width="fill_parent"
+        android:layout_height="45.0dip"
+        android:layout_below="@id/ll_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="15.0dip"
+        android:layout_marginRight="15.0dip"
+        android:layout_marginTop="90.0dip"
+        android:background="@drawable/btn_action_bg"
+        android:clickable="true"
+        android:enabled="false"
+        android:gravity="center"
+        android:onClick="tv_ok_onClick"
+        android:text="确定"
+        android:textColor="@android:color/white"
+        android:textSize="15.0sp" />
+
+</RelativeLayout>
+
+

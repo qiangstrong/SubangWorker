@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.subang.bean.OrderDetail;
-import com.subang.domain.Order;
 import com.subang.worker.activity.R;
 
 import java.util.List;
@@ -105,33 +104,32 @@ public class OrderAdapter extends BaseAdapter {
         switch (orderDetail.getStateEnum()) {
             case accepted: {
                 tv_operation1.setVisibility(View.VISIBLE);
-                tv_operation1.setText(R.string.operation_cancel);
-                tv_operation1.setTag(R.id.key_operation, Order.State.canceled);
+                tv_operation1.setText(R.string.operation_price);
+                tv_operation1.setTag(R.id.key_operation, Operation.price);
 
-                //在订单列表界面，处于已接受状态的订单不关联“催单”操作，因为此时没有把取衣员的手机号传递过来，
-                //用户可以在详情页面催单。
+                tv_operation2.setVisibility(View.VISIBLE);
+                tv_operation2.setText(R.string.operation_comment);
+                tv_operation2.setTag(R.id.key_operation, Operation.comment);
                 break;
             }
             case priced: {
                 tv_operation1.setVisibility(View.VISIBLE);
-                tv_operation1.setText(R.string.operation_cancel);
-                tv_operation1.setTag(R.id.key_operation, Order.State.canceled);
+                tv_operation1.setText(R.string.operation_pay);
+                tv_operation1.setTag(R.id.key_operation, Operation.pay);
 
                 tv_operation2.setVisibility(View.VISIBLE);
-                tv_operation2.setText(R.string.operation_pay);
-                tv_operation2.setTag(R.id.key_operation, Order.State.paid);
+                tv_operation2.setText(R.string.operation_comment);
+                tv_operation2.setTag(R.id.key_operation, Operation.comment);
                 break;
             }
-            case checked: {
+            case paid: {
                 tv_operation1.setVisibility(View.VISIBLE);
-                tv_operation1.setText(R.string.operation_deliver);
-                tv_operation1.setTag(R.id.key_operation, Order.State.delivered);
-                break;
-            }
-            case delivered: {
-                tv_operation1.setVisibility(View.VISIBLE);
-                tv_operation1.setText(R.string.operation_remark);
-                tv_operation1.setTag(R.id.key_operation, Order.State.remarked);
+                tv_operation1.setText(R.string.operation_fetch);
+                tv_operation1.setTag(R.id.key_operation, Operation.fetch);
+
+                tv_operation2.setVisibility(View.VISIBLE);
+                tv_operation2.setText(R.string.operation_comment);
+                tv_operation2.setTag(R.id.key_operation, Operation.comment);
                 break;
             }
         }
@@ -143,5 +141,9 @@ public class OrderAdapter extends BaseAdapter {
 
     public static class DataHolder {
         public List<OrderDetail> orderDetails;
+    }
+
+    public enum Operation {
+        price, pay, fetch, comment
     }
 }

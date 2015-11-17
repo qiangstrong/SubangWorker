@@ -240,6 +240,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@id/tv_addrcellnum_label"
                     android:layout_toRightOf="@id/tv_addrcellnum_label"
+                    android:autoLink="phone"
                     android:textColor="#ff141414"
                     android:textSize="14.0sp" />
 
@@ -361,8 +362,7 @@
                     android:layout_alignTop="@id/tv_workercellnum_label"
                     android:layout_toRightOf="@id/tv_workercellnum_label"
                     android:textColor="#ff141414"
-                    android:textSize="14.0sp"
-                    android:autoLink="phone"/>
+                    android:textSize="14.0sp" />
 
                 <TextView
                     android:id="@+id/tv_worker_comment_label"
@@ -658,7 +658,7 @@
                     android:layout_below="@id/v_line_history"
                     android:background="@android:color/white"
                     android:divider="@null"
-                    android:dividerHeight="0.0dip"/>
+                    android:dividerHeight="0.0dip" />
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>

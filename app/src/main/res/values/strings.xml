@@ -4,9 +4,8 @@
     <string name="file_worker">worker</string>
     <string name="err_network">网络连接错误，请检查网络是否连通。</string>
     <string name="flag_user">我们只做最专业的品质服务</string>
-    <string name="operation_cancel">取消</string>
-    <string name="operation_urge">催单</string>
+    <string name="operation_price">计价</string>
     <string name="operation_pay">支付</string>
-    <string name="operation_deliver">送达</string>
-    <string name="operation_remark">评价</string>
+    <string name="operation_fetch">扫码</string>
+    <string name="operation_comment">备注</string>
 </resources>

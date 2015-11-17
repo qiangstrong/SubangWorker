@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context="com.subang.worker.activity.OrderActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="fill_parent"
+        android:layout_height="50.0dip"
+        android:background="@color/blue_theme">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="45.0dip"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15.0dip"
+            android:contentDescription="@null"
+            android:onClick="iv_back_onClick"
+            android:src="@drawable/back_btn" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="订单"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/tile_size" />
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_order"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/rl_title"
+        android:layout_above="@+id/v_line" />
+
+    <View
+        android:id="@id/v_line"
+        android:layout_width="fill_parent"
+        android:layout_height="1.0px"
+        android:layout_above="@+id/ll_title"
+        android:background="@color/gray" />
+
+    <LinearLayout
+        android:id="@id/ll_title"
+        android:layout_width="fill_parent"
+        android:layout_height="50.0dip"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:background="@android:color/white">
+
+            <ImageView
+                android:id="@+id/iv_fetch"
+                android:layout_width="40.0dip"
+                android:layout_height="48.0dip"
+                android:layout_centerInParent="true"
+                android:onClick="iv_onClick"
+                android:src="@drawable/home_press_icon" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:background="@android:color/white">
+
+            <ImageView
+                android:id="@+id/iv_deliver"
+                android:layout_width="40.0dip"
+                android:layout_height="48.0dip"
+                android:layout_centerInParent="true"
+                android:onClick="iv_onClick"
+                android:src="@drawable/order_default_icon" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:background="@android:color/white">
+
+            <ImageView
+                android:id="@+id/iv_finish"
+                android:layout_width="40.0dip"
+                android:layout_height="48.0dip"
+                android:layout_centerInParent="true"
+                android:onClick="iv_onClick"
+                android:src="@drawable/mine_default_icon" />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
+
