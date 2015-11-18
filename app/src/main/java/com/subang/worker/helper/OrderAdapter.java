@@ -118,8 +118,8 @@ public class OrderAdapter extends BaseAdapter {
                 tv_operation1.setTag(R.id.key_operation, Operation.pay);
 
                 tv_operation2.setVisibility(View.VISIBLE);
-                tv_operation2.setText(R.string.operation_comment);
-                tv_operation2.setTag(R.id.key_operation, Operation.comment);
+                tv_operation2.setText(R.string.operation_price);
+                tv_operation2.setTag(R.id.key_operation, Operation.price);
                 break;
             }
             case paid: {

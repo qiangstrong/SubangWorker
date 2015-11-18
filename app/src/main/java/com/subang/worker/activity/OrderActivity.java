@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.subang.util.WebConst;
 import com.subang.worker.fragment.TypeFragment;
 import com.subang.worker.helper.MyFragmentPagerAdapter;
+import com.subang.worker.util.AppShare;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,8 @@ import java.util.List;
 public class OrderActivity extends Activity {
 
     private static final int NUM_FRAGMENT = 3;
+
+    private AppShare appShare;
 
     private TextView tv_title;
     private ViewPager vp_order;
@@ -36,6 +39,7 @@ public class OrderActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        appShare=(AppShare)getApplication();
         setContentView(R.layout.activity_order);
         findView();
 
@@ -46,6 +50,17 @@ public class OrderActivity extends Activity {
 
         vp_order.setCurrentItem(0);
         tv_title.setText("未取订单");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Integer position;
+        if (appShare.map.containsKey("order.position")){
+            position=(Integer)appShare.map.get("order.position");
+            appShare.map.remove("order.position");
+            vp_order.setCurrentItem(position);
+        }
     }
 
     private void findView() {

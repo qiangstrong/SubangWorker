@@ -17,6 +17,7 @@ import com.subang.bean.Result;
 import com.subang.domain.Order;
 import com.subang.worker.activity.CommentActivity;
 import com.subang.worker.activity.OrderDetailActivity;
+import com.subang.worker.activity.PriceActivity;
 import com.subang.worker.activity.R;
 import com.subang.worker.fragment.face.OnFrontListener;
 import com.subang.worker.helper.OrderAdapter;
@@ -134,6 +135,7 @@ public class TypeFragment extends Fragment implements OnFrontListener {
         filter.setTime(0);
         filter.setMoney(0.0);
         filter.setFreight(0.0);
+        filter.setMoneyTicket(0.0);
         filter.setCategoryname("");
 
         orderAdapter = new OrderAdapter(getActivity(), dataHolder);
@@ -190,6 +192,9 @@ public class TypeFragment extends Fragment implements OnFrontListener {
             operaData.orderid = (Integer) v.getTag(R.id.key_orderid);
             switch (operaData.operation) {
                 case price: {
+                    Intent intent = new Intent(getActivity(), PriceActivity.class);
+                    intent.putExtra("orderid", operaData.orderid);
+                    startActivity(intent);
                     break;
                 }
                 case pay: {
