@@ -11,12 +11,12 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.subang.api.OrderAPI;
-import com.subang.worker.helper.AddrDataHelper;
-import com.subang.worker.util.AppConst;
-import com.subang.worker.util.AppUtil;
 import com.subang.bean.OrderDetail;
 import com.subang.domain.Clothes;
 import com.subang.domain.History;
+import com.subang.worker.helper.AddrDataHelper;
+import com.subang.worker.util.AppConst;
+import com.subang.worker.util.AppUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +29,9 @@ public class OrderDetailActivity extends Activity {
     private static final int WHAT_CLOTHES = 2;
     private static final int WHAT_HISTORY = 3;
 
+    private int type;
+    private String arg;
+
     private TextView tv_orderno, tv_datetime, tv_categoryname, tv_userComment, tv_addrname, tv_addrcellnum,
             tv_area, tv_addrdetail, tv_workername, tv_workercellnum, tv_workerComment, tv_payType, tv_payment,
             tv_actualMoney, tv_clothesNum;
@@ -36,7 +39,6 @@ public class OrderDetailActivity extends Activity {
     private RelativeLayout rl_pay, rl_clothes;
 
     private Thread thread;
-    private Integer orderid;
     private OrderDetail orderDetail;
     private List<Clothes> clothess;
     private List<History> historys;
@@ -74,21 +76,21 @@ public class OrderDetailActivity extends Activity {
         @Override
         public void run() {
             AppUtil.confApi(OrderDetailActivity.this);
-            orderDetail = OrderAPI.get(orderid);
+            orderDetail = OrderAPI.get(type,arg);
             if (orderDetail == null) {
                 handler.sendEmptyMessage(AppConst.WHAT_NETWORK_ERR);
                 return;
             }
             handler.sendEmptyMessage(WHAT_DETAIL);
             if (orderDetail.isChecked()) {
-                clothess = OrderAPI.listClothes(orderid, null);
+                clothess = OrderAPI.listClothes(orderDetail.getId(), null);
                 if (clothess == null) {
                     handler.sendEmptyMessage(AppConst.WHAT_NETWORK_ERR);
                     return;
                 }
                 handler.sendEmptyMessage(WHAT_CLOTHES);
             }
-            historys = OrderAPI.listHistory(orderid, null);
+            historys = OrderAPI.listHistory(orderDetail.getId(), null);
             if (historys == null) {
                 handler.sendEmptyMessage(AppConst.WHAT_NETWORK_ERR);
                 return;
@@ -102,7 +104,8 @@ public class OrderDetailActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail);
         findView();
-        orderid = getIntent().getIntExtra("orderid", 0);
+        type = getIntent().getIntExtra("type", 0);
+        arg = getIntent().getStringExtra("arg");
 
         clothesItems = new ArrayList<>();
         historyItems = new ArrayList<>();

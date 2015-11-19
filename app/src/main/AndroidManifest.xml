@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.subang.worker.activity">
+    package="com.subang.worker.activity" >
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature android:name="android.hardware.camera.flash" />
 
     <application
         android:name="com.subang.worker.util.AppShare"
@@ -12,11 +18,10 @@
         android:label="@string/app_name"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:theme="@style/FullscreenTheme">
-        <activity android:name=".TestActivity">
-
+        android:theme="@style/FullscreenTheme" >
+        <activity android:name=".TestActivity" >
         </activity>
-        <activity android:name=".LoadActivity">
+        <activity android:name=".LoadActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,10 +35,14 @@
         <activity android:name=".OrderActivity" />
         <activity android:name=".MineActivity" />
         <activity android:name=".PriceActivity" />
-        <activity android:name=".BarcodeActivity" />
         <activity android:name=".CommentActivity" />
         <activity android:name=".CellnumActivity" />
         <activity android:name=".PasswordActivity" />
+        <activity
+            android:name=".BarcodeActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".FetchActivity" >
+        </activity>
     </application>
 
 </manifest>

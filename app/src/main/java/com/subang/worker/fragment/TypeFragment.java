@@ -15,7 +15,9 @@ import com.subang.applib.view.XListView;
 import com.subang.bean.OrderDetail;
 import com.subang.bean.Result;
 import com.subang.domain.Order;
+import com.subang.util.WebConst;
 import com.subang.worker.activity.CommentActivity;
+import com.subang.worker.activity.FetchActivity;
 import com.subang.worker.activity.OrderDetailActivity;
 import com.subang.worker.activity.PriceActivity;
 import com.subang.worker.activity.R;
@@ -52,7 +54,8 @@ public class TypeFragment extends Fragment implements OnFrontListener {
             position = position - 1;
             if (position >= 0 && position < orderDetails.size()) {
                 Intent intent = new Intent(getActivity(), OrderDetailActivity.class);
-                intent.putExtra("orderid", orderDetails.get(position).getId());
+                intent.putExtra("type", WebConst.ORDER_GET_ID);
+                intent.putExtra("arg", orderDetails.get(position).getId().toString());
                 startActivity(intent);
             }
         }
@@ -201,6 +204,9 @@ public class TypeFragment extends Fragment implements OnFrontListener {
                     break;
                 }
                 case fetch: {
+                    Intent intent = new Intent(getActivity(), FetchActivity.class);
+                    intent.putExtra("orderid", operaData.orderid);
+                    startActivity(intent);
                     break;
                 }
                 case comment: {

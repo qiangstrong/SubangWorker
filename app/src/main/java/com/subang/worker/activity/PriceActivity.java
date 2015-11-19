@@ -21,6 +21,7 @@ import com.subang.applib.view.WheelView;
 import com.subang.bean.OrderDetail;
 import com.subang.bean.Result;
 import com.subang.domain.Price;
+import com.subang.util.WebConst;
 import com.subang.worker.util.AppConst;
 import com.subang.worker.util.AppShare;
 import com.subang.worker.util.AppUtil;
@@ -98,7 +99,7 @@ public class PriceActivity extends Activity {
         @Override
         public void run() {
             AppUtil.confApi(PriceActivity.this);
-            OrderDetail orderDetail = OrderAPI.get(orderid);
+            OrderDetail orderDetail = OrderAPI.get(WebConst.ORDER_GET_ID,orderid.toString());
             if (orderDetail == null) {
                 handler.sendEmptyMessage(AppConst.WHAT_NETWORK_ERR);
                 return;

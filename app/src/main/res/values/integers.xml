@@ -8,5 +8,6 @@
     <integer name="cellnum">11</integer>
     <integer name="password">50</integer>
     <integer name="authcode">4</integer>
+    <integer name="barcode">13</integer>
     <integer name="feedback_comment_text">200</integer>
 </resources>
