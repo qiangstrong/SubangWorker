@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import com.google.zxing.Result;
 import com.subang.worker.util.AppUtil;
@@ -13,7 +13,7 @@ import com.welcu.android.zxingfragmentlib.BarCodeScannerFragment;
 
 public class BarcodeActivity extends FragmentActivity {
 
-    private TextView tv_barcode;
+    private EditText tv_barcode;
     private BarCodeScannerFragment fm_scan;
     private boolean isStop = false;
 
@@ -30,7 +30,7 @@ public class BarcodeActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barcode);
-        tv_barcode = (TextView) findViewById(R.id.tv_barcode);
+        tv_barcode = (EditText) findViewById(R.id.et_barcode);
         fm_scan = (BarCodeScannerFragment) getSupportFragmentManager().findFragmentById(R.id.fm_sacn);
         fm_scan.setmCallBack(resultCallback);
     }

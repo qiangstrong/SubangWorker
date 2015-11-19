@@ -66,7 +66,7 @@
                 android:layout_height="48.0dip"
                 android:layout_centerInParent="true"
                 android:onClick="iv_onClick"
-                android:src="@drawable/home_press_icon" />
+                android:src="@drawable/fetch_press_icon" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -81,7 +81,7 @@
                 android:layout_height="48.0dip"
                 android:layout_centerInParent="true"
                 android:onClick="iv_onClick"
-                android:src="@drawable/order_default_icon" />
+                android:src="@drawable/deliver_default_icon" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -96,7 +96,7 @@
                 android:layout_height="48.0dip"
                 android:layout_centerInParent="true"
                 android:onClick="iv_onClick"
-                android:src="@drawable/mine_default_icon" />
+                android:src="@drawable/finish_default_icon" />
         </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>

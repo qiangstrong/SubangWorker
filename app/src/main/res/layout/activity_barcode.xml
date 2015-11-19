@@ -19,12 +19,14 @@
         android:orientation="horizontal"
         android:paddingBottom="5dip">
 
-        <TextView
-            android:id="@+id/tv_barcode"
-            android:layout_width="150dip"
+        <EditText
+            android:id="@+id/et_barcode"
+            android:layout_width="200dip"
             android:layout_height="wrap_content"
-            android:padding="5dip"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="@integer/barcode"
+            android:padding="5dip" />
 
         <Button
             android:id="@+id/btn_stop"

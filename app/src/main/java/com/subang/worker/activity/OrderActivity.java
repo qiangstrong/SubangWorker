@@ -80,25 +80,25 @@ public class OrderActivity extends Activity {
         switch (v.getId()) {
             case R.id.iv_fetch: {
                 tv_title.setText("未取订单");
-                imageViews[0].setImageResource(R.drawable.home_press_icon);
-                imageViews[1].setImageResource(R.drawable.order_default_icon);
-                imageViews[2].setImageResource(R.drawable.mine_default_icon);
+                imageViews[0].setImageResource(R.drawable.fetch_press_icon);
+                imageViews[1].setImageResource(R.drawable.deliver_default_icon);
+                imageViews[2].setImageResource(R.drawable.finish_default_icon);
                 vp_order.setCurrentItem(0);
                 break;
             }
             case R.id.iv_deliver: {
                 tv_title.setText("未送订单");
-                imageViews[0].setImageResource(R.drawable.home_default_icon);
-                imageViews[1].setImageResource(R.drawable.order_press_icon);
-                imageViews[2].setImageResource(R.drawable.mine_default_icon);
+                imageViews[0].setImageResource(R.drawable.fetch_default_icon);
+                imageViews[1].setImageResource(R.drawable.deliver_press_icon);
+                imageViews[2].setImageResource(R.drawable.finish_default_icon);
                 vp_order.setCurrentItem(1);
                 break;
             }
             case R.id.iv_finish: {
                 tv_title.setText("完成订单");
-                imageViews[0].setImageResource(R.drawable.home_default_icon);
-                imageViews[1].setImageResource(R.drawable.order_default_icon);
-                imageViews[2].setImageResource(R.drawable.mine_press_icon);
+                imageViews[0].setImageResource(R.drawable.fetch_default_icon);
+                imageViews[1].setImageResource(R.drawable.deliver_default_icon);
+                imageViews[2].setImageResource(R.drawable.finish_press_icon);
                 vp_order.setCurrentItem(2);
                 break;
             }
