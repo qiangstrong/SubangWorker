@@ -23,6 +23,7 @@ public class FetchActivity extends Activity {
             switch (msg.what) {
                 case AppConst.WHAT_NETWORK_ERR: {
                     AppUtil.networkTip(FetchActivity.this);
+                    FetchActivity.this.finish();
                     break;
                 }
                 case AppConst.WHAT_SUCC_SUBMIT: {

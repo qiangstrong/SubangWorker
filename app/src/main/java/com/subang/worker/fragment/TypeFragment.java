@@ -19,6 +19,7 @@ import com.subang.util.WebConst;
 import com.subang.worker.activity.CommentActivity;
 import com.subang.worker.activity.FetchActivity;
 import com.subang.worker.activity.OrderDetailActivity;
+import com.subang.worker.activity.PayActivity;
 import com.subang.worker.activity.PriceActivity;
 import com.subang.worker.activity.R;
 import com.subang.worker.fragment.face.OnFrontListener;
@@ -201,6 +202,9 @@ public class TypeFragment extends Fragment implements OnFrontListener {
                     break;
                 }
                 case pay: {
+                    Intent intent = new Intent(getActivity(), PayActivity.class);
+                    intent.putExtra("orderid", operaData.orderid);
+                    startActivity(intent);
                     break;
                 }
                 case fetch: {

@@ -198,7 +198,7 @@ public class OrderDetailActivity extends Activity {
         for (History history : historys) {
             historyItem = new HashMap<>();
             historyItem.put("operation", history.getOperationDes());
-            historyItem.put("time", history.getTime());
+            historyItem.put("time", history.getTimeDes());
             historyItems.add(historyItem);
         }
         historySimpleAdapter.notifyDataSetChanged();
