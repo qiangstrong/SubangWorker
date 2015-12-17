@@ -72,4 +72,15 @@
         android:textColor="@android:color/white"
         android:textSize="16.0sp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:clickable="true"
+        android:onClick="tv_forget_onClick"
+        android:padding="20dip"
+        android:text="@string/text_forget"
+        android:textColor="@android:color/white"
+        android:textSize="15sp" />
 </RelativeLayout>

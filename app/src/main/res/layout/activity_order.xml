@@ -20,6 +20,7 @@
             android:layout_marginLeft="15.0dip"
             android:contentDescription="@null"
             android:onClick="iv_back_onClick"
+            android:paddingRight="20dip"
             android:src="@drawable/back_btn" />
 
         <TextView
@@ -36,8 +37,8 @@
         android:id="@+id/vp_order"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@id/rl_title"
-        android:layout_above="@+id/v_line" />
+        android:layout_above="@+id/v_line"
+        android:layout_below="@id/rl_title" />
 
     <View
         android:id="@id/v_line"

@@ -8,6 +8,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.subang.worker.util.AppConst;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +31,7 @@ public class MineActivity extends Activity {
             switch (position) {
                 case 0: {
                     Intent intent = new Intent(MineActivity.this, CellnumActivity.class);
+                    intent.putExtra("type", AppConst.TYPE_CHANGE);
                     startActivity(intent);
                     break;
                 }

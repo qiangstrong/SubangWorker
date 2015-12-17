@@ -1,6 +1,7 @@
 package com.subang.worker.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -29,6 +30,7 @@ public class CellnumActivity extends Activity {
     private static final int WHAT_GET_FAIL = 2;
     private static final int WHAT_OK = 3;
 
+    private int type;       //标志此activity用于改变用户信息,登录
     private Timer timer;    //调度timerTask
 
     private EditText et_cellnum, et_authcode;
@@ -88,8 +90,15 @@ public class CellnumActivity extends Activity {
                     break;
                 }
                 case WHAT_OK: {
-                    AppUtil.tip(CellnumActivity.this, "手机号更改成功。");
-                    CellnumActivity.this.finish();
+                    if (type == AppConst.TYPE_CHANGE) {
+                        AppUtil.tip(CellnumActivity.this, "手机号更改成功。");
+                        CellnumActivity.this.finish();
+                    } else if (type == AppConst.TYPE_LOGIN) {
+                        Intent intent = new Intent(CellnumActivity.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        CellnumActivity.this.finish();
+                    }
                     break;
                 }
             }
@@ -118,15 +127,17 @@ public class CellnumActivity extends Activity {
         public void run() {
             AppUtil.confApi(CellnumActivity.this);
             cellnum = et_cellnum.getText().toString();
-            Result result = WorkerAPI.chkCellnum(et_cellnum.getText().toString());
-            if (result == null) {
-                handler.sendEmptyMessage(AppConst.WHAT_NETWORK_ERR);
-                return;
-            }
-            if (!result.getCode().equals(Result.OK)) {
-                Message msg = ComUtil.getMessage(WHAT_GET_FAIL, "该手机号已被注册。");
-                handler.sendMessage(msg);
-                return;
+            if (type!=AppConst.TYPE_LOGIN){
+                Result result = WorkerAPI.chkCellnum(et_cellnum.getText().toString());
+                if (result == null) {
+                    handler.sendEmptyMessage(AppConst.WHAT_NETWORK_ERR);
+                    return;
+                }
+                if (!result.getCode().equals(Result.OK)) {
+                    Message msg = ComUtil.getMessage(WHAT_GET_FAIL, "该手机号已被注册。");
+                    handler.sendMessage(msg);
+                    return;
+                }
             }
             if (timerTask != null) {
                 timerTask.cancel();
@@ -153,31 +164,52 @@ public class CellnumActivity extends Activity {
         @Override
         public void run() {
             AppUtil.confApi(CellnumActivity.this);
-            Result result = WorkerAPI.chgCellnum(cellnum);
-            if (result == null) {
-                handler.sendEmptyMessage(AppConst.WHAT_NETWORK_ERR);
-                return;
-            }
-            if (!result.getCode().equals(Result.OK)) {
-                Message msg = ComUtil.getMessage(AppConst.WHAT_INFO, "该手机号已被注册。");
-                handler.sendMessage(msg);
-                return;
-            }
+            if (type == AppConst.TYPE_CHANGE) {
+                Result result = WorkerAPI.chgCellnum(cellnum);
+                if (result == null) {
+                    handler.sendEmptyMessage(AppConst.WHAT_NETWORK_ERR);
+                    return;
+                }
+                if (!result.getCode().equals(Result.OK)) {
+                    Message msg = ComUtil.getMessage(AppConst.WHAT_INFO, "该手机号已被注册。");
+                    handler.sendMessage(msg);
+                    return;
+                }
 
-            AppUtil.conf(CellnumActivity.this);
-            Worker worker = new Worker();
-            worker.setCellnum(cellnum);
-            worker.setPassword(AppConf.password);
-            AppUtil.saveConf(CellnumActivity.this, worker);
-            AppUtil.conf(CellnumActivity.this);
-            AppUtil.confApi(CellnumActivity.this);
-            handler.sendEmptyMessage(WHAT_OK);
+                AppUtil.conf(CellnumActivity.this);
+                Worker worker = new Worker();
+                worker.setCellnum(cellnum);
+                worker.setPassword(AppConf.password);
+                AppUtil.saveConf(CellnumActivity.this, worker);
+                AppUtil.conf(CellnumActivity.this);
+                AppUtil.confApi(CellnumActivity.this);
+                handler.sendEmptyMessage(WHAT_OK);
+            }else if (type == AppConst.TYPE_LOGIN) {
+                Worker worker = new Worker();
+                worker.setCellnum(cellnum);
+                worker = WorkerAPI.loginCellnum(worker);
+                if (worker == null) {
+                    handler.sendEmptyMessage(AppConst.WHAT_NETWORK_ERR);
+                    return;
+                }
+                if (worker.getCellnum() == null) {
+                    Message msg = ComUtil.getMessage(AppConst.WHAT_INFO, "登录失败。");
+                    handler.sendMessage(msg);
+                    return;
+                }
+                AppUtil.saveConf(CellnumActivity.this, worker);
+                AppUtil.conf(CellnumActivity.this);
+                AppUtil.confApi(CellnumActivity.this);
+                handler.sendEmptyMessage(WHAT_OK);                //转主界面
+            }
+            
         }
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        type = getIntent().getIntExtra("type", AppConst.TYPE_SIGNIN);
         setContentView(R.layout.activity_cellnum);
         findView();
 

@@ -2,10 +2,13 @@
 <resources>
     <string name="app_name">取衣员</string>
     <string name="file_worker">worker</string>
+
     <string name="err_network">网络连接错误，请检查网络是否连通。</string>
     <string name="flag_user">我们只做最专业的品质服务</string>
     <string name="operation_price">计价</string>
     <string name="operation_pay">支付</string>
     <string name="operation_fetch">扫码</string>
     <string name="operation_comment">备注</string>
+
+    <string name="text_forget"><u>忘记密码，请点击这里</u></string>
 </resources>
