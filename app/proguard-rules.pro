@@ -18,3 +18,31 @@
 -keep class com.tencent.mm.sdk.** {
    *;
 }
+
+-keep class com.umeng.message.* {
+    public <fields>;
+    public <methods>;
+}
+
+-keep class com.umeng.message.protobuffer.* {
+	public <fields>;
+    public <methods>;
+}
+
+-keep class com.squareup.wire.* {
+	public <fields>;
+    public <methods>;
+}
+
+-keep class org.android.agoo.impl.*{
+	public <fields>;
+    public <methods>;
+}
+
+-keep class org.android.agoo.service.* {*;}
+
+-keep class org.android.spdy.**{*;}
+
+-keep public class com.subang.worker.activity.R$*{
+   public static final int *;
+}
