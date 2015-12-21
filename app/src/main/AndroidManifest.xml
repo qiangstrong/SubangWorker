@@ -41,16 +41,13 @@
 
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="5662e474e0f55a71d40027d5" >
-        </meta-data>
+            android:value="5662e474e0f55a71d40027d5"/>
         <meta-data
             android:name="UMENG_MESSAGE_SECRET"
-            android:value="f0990ab1c7f50f9a084300ac50f5ed0a" >
-        </meta-data>
+            android:value="f0990ab1c7f50f9a084300ac50f5ed0a"/>
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="subang_android_worker" >
-        </meta-data>
+            android:value="subang_worker_android"/>
 
         <activity android:name=".TestActivity">
 
@@ -229,6 +226,15 @@
         <service
             android:name="com.umeng.message.local.UmengLocalNotificationService"
             android:exported="false" />
+
+        <!-- 友盟自动更新 -->
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService"/>
+
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
     </application>
 
 </manifest>

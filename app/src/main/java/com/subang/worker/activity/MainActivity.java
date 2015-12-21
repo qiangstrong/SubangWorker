@@ -9,11 +9,13 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
 
+import com.subang.util.WebConst;
 import com.subang.worker.util.AppConf;
 import com.subang.worker.util.AppConst;
 import com.subang.worker.util.AppUtil;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
+import com.umeng.update.UmengUpdateAgent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,14 +66,18 @@ public class MainActivity extends Activity {
         gv_action.setAdapter(actionSimpleAdapter);
         gv_action.setOnItemClickListener(actionOnItemClickListener);
 
+        //友盟消息推送
         pushAgent = PushAgent.getInstance(MainActivity.this);
         pushAgent.enable(umengRegisterCallback);
         pushAgent.onAppStart();
         try {
-            pushAgent.addAlias(AppConf.cellnum,"subang_cellnum");
+            pushAgent.addAlias(AppConf.cellnum, WebConst.ALIAS_TYPE);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        //友盟自动更新
+        UmengUpdateAgent.update(this);
     }
 
     private void findView() {
@@ -89,7 +95,7 @@ public class MainActivity extends Activity {
         }
     }
 
-    public IUmengRegisterCallback umengRegisterCallback = new IUmengRegisterCallback() {
+    private IUmengRegisterCallback umengRegisterCallback = new IUmengRegisterCallback() {
         @Override
         public void onRegistered(String registrationId) {
             AppUtil.conf(MainActivity.this);

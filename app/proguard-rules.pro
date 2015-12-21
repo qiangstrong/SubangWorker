@@ -46,3 +46,10 @@
 -keep public class com.subang.worker.activity.R$*{
    public static final int *;
 }
+
+-keepclassmembers class * {
+   public <init>(org.json.JSONObject);
+}
+
+-keep public class com.umeng.fb.ui.ThreadView {
+}

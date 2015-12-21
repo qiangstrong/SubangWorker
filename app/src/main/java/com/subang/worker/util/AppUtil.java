@@ -2,11 +2,15 @@ package com.subang.worker.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.annotation.StringRes;
 import android.widget.Toast;
 
 import com.subang.api.SubangAPI;
+import com.subang.bean.AppInfo;
 import com.subang.domain.Worker;
 import com.subang.util.WebConst;
 import com.subang.worker.activity.R;
@@ -58,6 +62,18 @@ public class AppUtil {
         return false;
     }
 
+    public static AppInfo getAppInfo(Context context) {
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        Integer version = packageInfo.versionCode;
+        AppInfo appInfo = new AppInfo(AppInfo.USER_WORKER, AppInfo.OS_ANDROID, version);
+        return appInfo;
+    }
+
     //配置api，使用api前调用此函数。如果没有配置，则配置
     public static void confApi(Context context) {
         if (SubangAPI.isConfed()) {
@@ -84,6 +100,11 @@ public class AppUtil {
 
     public static void tip(Context context, String info) {
         Toast toast = Toast.makeText(context, info, Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+    public static void tip(Context context, @StringRes int resId) {
+        Toast toast = Toast.makeText(context, resId, Toast.LENGTH_SHORT);
         toast.show();
     }
 }
