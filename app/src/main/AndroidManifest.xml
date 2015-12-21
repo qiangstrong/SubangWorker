@@ -34,7 +34,7 @@
         android:name="com.subang.worker.util.AppShare"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="@string/name_app"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/FullscreenTheme">
@@ -54,7 +54,7 @@
         </activity>
         <activity
             android:name=".LoadActivity"
-            android:label="取衣员">
+            android:label="@string/name_app">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -112,7 +112,7 @@
         <!-- 监听通知点击或者忽略处理的广播 -->
         <receiver
             android:name="com.umeng.message.NotificationProxyBroadcastReceiver"
-            android:exported="false"></receiver>
+            android:exported="false"/>
 
         <!-- 监听开机运行、网络连接变化、卸载的广播 -->
         <receiver

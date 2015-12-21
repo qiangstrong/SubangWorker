@@ -15,10 +15,19 @@ import com.subang.domain.Worker;
 import com.subang.util.WebConst;
 import com.subang.worker.activity.R;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Created by Qiang on 2015/10/31.
  */
 public class AppUtil {
+
+    private static int NETWORK_TIP_INTERVAL = 30000;//30s
+
+    private static boolean isNetworkTip = true;
+    private static Timer timer;    //调度timerTask
+    private static TimerTask timerTask;        //30s后可以再次提示网络错误
 
     //把用户信息（app配置）保存在磁盘
     public static void saveConf(Context context, Worker worker) {
@@ -94,8 +103,22 @@ public class AppUtil {
     }
 
     public static void networkTip(Context context) {
+        if (!isNetworkTip) {
+            return;
+        }
         Toast toast = Toast.makeText(context, R.string.err_network, Toast.LENGTH_SHORT);
         toast.show();
+        isNetworkTip = false;
+        timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                isNetworkTip = true;
+            }
+        };
+        if (timer == null) {
+            timer = new Timer();
+        }
+        timer.schedule(timerTask, NETWORK_TIP_INTERVAL);
     }
 
     public static void tip(Context context, String info) {
