@@ -15,6 +15,7 @@ import com.subang.worker.util.AppConst;
 import com.subang.worker.util.AppUtil;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
+import com.umeng.message.UmengRegistrar;
 import com.umeng.update.UmengUpdateAgent;
 
 import java.util.ArrayList;
@@ -26,7 +27,8 @@ public class MainActivity extends Activity {
 
     private static final int NUM_ACTION = 3;
 
-    PushAgent pushAgent;
+    private Thread thread;
+    private PushAgent pushAgent;
 
     private GridView gv_action;
     private SimpleAdapter actionSimpleAdapter;
@@ -55,6 +57,17 @@ public class MainActivity extends Activity {
         }
     };
 
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                pushAgent.addAlias(AppConf.cellnum, WebConst.ALIAS_TYPE);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,11 +83,13 @@ public class MainActivity extends Activity {
         pushAgent = PushAgent.getInstance(MainActivity.this);
         pushAgent.enable(umengRegisterCallback);
         pushAgent.onAppStart();
-        try {
-            pushAgent.addAlias(AppConf.cellnum, WebConst.ALIAS_TYPE);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (thread == null || !thread.isAlive()) {
+            thread = new Thread(runnable);
+            thread.start();
         }
+        PushAgent.getInstance(MainActivity.this).setMuteDurationSeconds(3);
+        String device_token = UmengRegistrar.getRegistrationId(MainActivity.this);
+        Log.e(AppConst.LOG_TAG, device_token);
 
         //友盟自动更新
         UmengUpdateAgent.update(this);
@@ -102,11 +117,11 @@ public class MainActivity extends Activity {
 
             pushAgent.setNoDisturbMode(0, 0, 0, 0);
             try {
-                pushAgent.addAlias(AppConf.cellnum,"subang_cellnum");
+                pushAgent.addAlias(AppConf.cellnum, WebConst.ALIAS_TYPE);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            Log.e(AppConst.LOG_TAG,"IUmengRegisterCallback");
+            Log.e(AppConst.LOG_TAG, "IUmengRegisterCallback");
         }
     };
 }

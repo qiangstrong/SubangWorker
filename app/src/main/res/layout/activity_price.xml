@@ -48,81 +48,30 @@
             android:textSize="@dimen/tile_size" />
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/ll_price"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/rl_title"
-        android:layout_marginBottom="5dip"
-        android:background="@android:color/white"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <com.subang.applib.view.WheelView
-            android:id="@+id/wv_price"
-            android:layout_width="150dip"
-            android:layout_height="wrap_content"
-            app:offset="1"
-            app:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/tv_add"
-            android:layout_width="100dip"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn_action_bg"
-            android:layout_marginLeft="20dip"
-            android:clickable="true"
-            android:enabled="false"
-            android:gravity="center"
-            android:onClick="tv_add_onClick"
-            android:padding="10dip"
-            android:text="添加"
-            android:textColor="@android:color/white"
-            android:textSize="15.0sp" />
-    </LinearLayout>
-
     <RelativeLayout
         android:id="@+id/rl_total"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ll_price"
+        android:layout_below="@id/rl_title"
         android:layout_marginBottom="5dip"
         android:background="@android:color/white"
         android:paddingBottom="10dip"
         android:paddingLeft="15dip"
         android:paddingTop="10dip">
 
-        <TextView
-            android:id="@+id/tv_total_label"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/et_money"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="订单总额："
-            android:textColor="#ff444444"
-            android:textSize="18.0sp" />
-
-        <TextView
-            android:id="@+id/tv_total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/tv_total_label"
-            android:layout_toRightOf="@id/tv_total_label"
-            android:text="0元"
-            android:textColor="#ff141414"
-            android:textSize="18.0sp" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8.0dip"
+            android:hint="请输入订单金额"
+            android:inputType="number"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/gray_hint"
+            android:textCursorDrawable="@null"
+            android:textSize="16.0sp" />
     </RelativeLayout>
-
-    <com.subang.applib.view.SwipeMenuListView
-        android:id="@+id/lv_moeny"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/rl_total"
-        android:background="@android:color/white"
-        android:cacheColorHint="@android:color/transparent"
-        android:divider="#ffe5e5e5"
-        android:dividerHeight="0.5dip"
-        android:listSelector="@android:color/transparent"
-        android:overScrollMode="never" />
-
 </RelativeLayout>
 
 

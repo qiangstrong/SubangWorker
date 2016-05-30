@@ -89,7 +89,7 @@ public class AppUtil {
             return;
         }
         conf(context);
-        SubangAPI.conf(WebConst.WORKER, AppConf.cellnum, AppConf.password, AppConf.basePath);
+        SubangAPI.conf(WebConst.WORKER, AppConf.cellnum, AppConf.basePath);
     }
 
     public static boolean checkNetwork(Context context) {

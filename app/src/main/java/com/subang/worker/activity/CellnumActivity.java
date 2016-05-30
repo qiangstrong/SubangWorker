@@ -9,10 +9,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.subang.api.UserAPI;
 import com.subang.api.WorkerAPI;
 import com.subang.bean.Result;
 import com.subang.domain.Worker;
-import com.subang.util.SmsUtil;
 import com.subang.util.SuUtil;
 import com.subang.util.WebConst;
 import com.subang.worker.helper.MyTextWatcher;
@@ -143,7 +143,8 @@ public class CellnumActivity extends Activity {
                 timerTask.cancel();
             }
             authcode = SuUtil.getAuthcode();
-            if (!SmsUtil.send(cellnum, com.subang.util.AppConst.templateId_authcode, SmsUtil.toAuthcodeContent(authcode))) {
+            Result result = UserAPI.getAuthcode(cellnum, authcode);
+            if (result==null||!result.isOk()) {
                 authcode = null;
                 Message msg = ComUtil.getMessage(WHAT_GET_FAIL, "发送验证码错误。");
                 handler.sendMessage(msg);
@@ -226,7 +227,6 @@ public class CellnumActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-        SmsUtil.init();
     }
 
     private void findView() {
