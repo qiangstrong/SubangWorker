@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.subang.bean.OrderDetail;
+import com.subang.bean.RecordDetail;
 import com.subang.worker.activity.R;
 
 import java.util.List;
@@ -16,18 +16,18 @@ import java.util.List;
 /**
  * Created by Qiang on 2015/11/1.
  */
-public class OrderAdapter extends BaseAdapter {
+public class RecordAdapter extends BaseAdapter {
 
     private ImageView iv_categorylogo;
     private TextView tv_categoryname, tv_state, tv_orderno, tv_datetime, tv_totalMoney, tv_operation1, tv_operation2;
-    private OrderDetail orderDetail;
+    private RecordDetail recordDetail;
 
     private LayoutInflater inflater;
     private DataHolder dataHolder;
     private View.OnClickListener operationOnClickListener;
 
 
-    public OrderAdapter(Context context, DataHolder dataHolder) {
+    public RecordAdapter(Context context, DataHolder dataHolder) {
         super();
         this.dataHolder = dataHolder;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -43,8 +43,8 @@ public class OrderAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        if (dataHolder.orderDetails != null) {
-            return dataHolder.orderDetails.size();
+        if (dataHolder.recordDetails != null) {
+            return dataHolder.recordDetails.size();
         }
         return 0;
     }
@@ -66,10 +66,10 @@ public class OrderAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.item_order, null);
         }
         findView(view);
-        if (dataHolder.orderDetails == null) {
+        if (dataHolder.recordDetails == null) {
             return null;       //应该不会执行到
         }
-        orderDetail = dataHolder.orderDetails.get(position);
+        recordDetail = dataHolder.recordDetails.get(position);
         bindData();
         bindOperation();
         return view;
@@ -87,16 +87,12 @@ public class OrderAdapter extends BaseAdapter {
     }
 
     private void bindData() {
-        if (orderDetail.getCategoryname().equals("洗鞋")) {
-            iv_categorylogo.setImageResource(R.drawable.washing_shoes);
-        } else {
-            iv_categorylogo.setImageResource(R.drawable.washing_clothes);
-        }
-        tv_categoryname.setText(orderDetail.getCategoryname());
-        tv_state.setText(orderDetail.getStateDes());
-        tv_orderno.setText("订单编号：" + orderDetail.getOrderno());
-        tv_datetime.setText("取件时间： " + orderDetail.getDateDes() + " " + orderDetail.getTimeDes());
-        tv_totalMoney.setText("订单总额： " + orderDetail.getTotalMoneyDes());
+        iv_categorylogo.setImageResource(R.drawable.washing_clothes);
+        tv_categoryname.setText(recordDetail.getName());
+        tv_state.setText(recordDetail.getStateDes());
+        tv_orderno.setText("订单编号：" + recordDetail.getOrderno());
+        tv_datetime.setText("下单时间： " + recordDetail.getTimeDes());
+        tv_totalMoney.setText(recordDetail.getPaymentDes());
     }
 
     private void bindOperation() {
@@ -104,52 +100,22 @@ public class OrderAdapter extends BaseAdapter {
         tv_operation1.setVisibility(View.INVISIBLE);
         tv_operation2.setVisibility(View.INVISIBLE);
 
-        switch (orderDetail.getStateEnum()) {
-            case accepted: {
-                tv_operation1.setVisibility(View.VISIBLE);
-                tv_operation1.setText(R.string.operation_price);
-                tv_operation1.setTag(R.id.key_operation, Operation.price);
-
-                tv_operation2.setVisibility(View.VISIBLE);
-                tv_operation2.setText(R.string.operation_comment);
-                tv_operation2.setTag(R.id.key_operation, Operation.comment);
-                break;
-            }
-            case priced: {
-                tv_operation1.setVisibility(View.VISIBLE);
-                tv_operation1.setText(R.string.operation_pay);
-                tv_operation1.setTag(R.id.key_operation, Operation.pay);
-
-                tv_operation2.setVisibility(View.VISIBLE);
-                tv_operation2.setText(R.string.operation_price);
-                tv_operation2.setTag(R.id.key_operation, Operation.price);
-                break;
-            }
+        switch (recordDetail.getStateEnum()) {
             case paid: {
-                tv_operation1.setVisibility(View.VISIBLE);
-                tv_operation1.setText(R.string.operation_fetch);
-                tv_operation1.setTag(R.id.key_operation, Operation.fetch);
-
-                tv_operation2.setVisibility(View.VISIBLE);
-                tv_operation2.setText(R.string.operation_comment);
-                tv_operation2.setTag(R.id.key_operation, Operation.comment);
-                break;
-            }
-            case checked: {
                 tv_operation1.setVisibility(View.VISIBLE);
                 tv_operation1.setText(R.string.operation_deliver);
                 tv_operation1.setTag(R.id.key_operation, Operation.deliver);
                 break;
             }
         }
-        tv_operation1.setTag(R.id.key_orderid, orderDetail.getId());
+        tv_operation1.setTag(R.id.key_orderid, recordDetail.getId());
         tv_operation1.setOnClickListener(operationOnClickListener);
-        tv_operation2.setTag(R.id.key_orderid, orderDetail.getId());
+        tv_operation2.setTag(R.id.key_orderid, recordDetail.getId());
         tv_operation2.setOnClickListener(operationOnClickListener);
     }
 
     public static class DataHolder {
-        public List<OrderDetail> orderDetails;
+        public List<RecordDetail> recordDetails;
     }
 
     public enum Operation {

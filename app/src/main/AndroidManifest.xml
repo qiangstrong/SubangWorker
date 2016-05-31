@@ -14,7 +14,8 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />;
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    ;
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
@@ -38,20 +39,17 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/FullscreenTheme">
-
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="5662e474e0f55a71d40027d5"/>
+            android:value="5662e474e0f55a71d40027d5" />
         <meta-data
             android:name="UMENG_MESSAGE_SECRET"
-            android:value="f0990ab1c7f50f9a084300ac50f5ed0a"/>
+            android:value="f0990ab1c7f50f9a084300ac50f5ed0a" />
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="subang_worker_android"/>
+            android:value="subang_worker_android" />
 
-        <activity android:name=".TestActivity">
-
-        </activity>
+        <activity android:name=".TestActivity"></activity>
         <activity
             android:name=".LoadActivity"
             android:label="@string/name_app">
@@ -63,9 +61,11 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".OrderDetailActivity" />
+        <activity android:name=".RecordDetailActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".ScanActivity" />
         <activity android:name=".OrderActivity" />
+        <activity android:name=".RecordActivity" />
         <activity android:name=".MineActivity" />
         <activity android:name=".PriceActivity" />
         <activity android:name=".CommentActivity" />
@@ -112,7 +112,7 @@
         <!-- 监听通知点击或者忽略处理的广播 -->
         <receiver
             android:name="com.umeng.message.NotificationProxyBroadcastReceiver"
-            android:exported="false"/>
+            android:exported="false" />
 
         <!-- 监听开机运行、网络连接变化、卸载的广播 -->
         <receiver
@@ -126,6 +126,7 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
@@ -146,6 +147,7 @@
             android:process=":push">
             <intent-filter>
                 <action android:name="org.agoo.android.intent.action.ELECTION_RESULT_V4" />
+
                 <category android:name="umeng" />
             </intent-filter>
         </receiver>
@@ -178,6 +180,7 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="org.agoo.android.intent.action.PING_V4" />
+
                 <category android:name="umeng" />
             </intent-filter>
         </service>
@@ -230,11 +233,11 @@
         <!-- 友盟自动更新 -->
         <service
             android:name="com.umeng.update.net.DownloadingService"
-            android:process=":DownloadingService"/>
+            android:process=":DownloadingService" />
 
         <activity
             android:name="com.umeng.update.UpdateDialogActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
     </application>
 
 </manifest>

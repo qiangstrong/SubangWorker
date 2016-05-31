@@ -25,7 +25,7 @@ import java.util.Map;
 
 public class MainActivity extends Activity {
 
-    private static final int NUM_ACTION = 3;
+    private static final int NUM_ACTION = 4;
 
     private Thread thread;
     private PushAgent pushAgent;
@@ -49,6 +49,11 @@ public class MainActivity extends Activity {
                     break;
                 }
                 case 2: {
+                    Intent intent = new Intent(MainActivity.this, RecordActivity.class);
+                    startActivity(intent);
+                    break;
+                }
+                case 3: {
                     Intent intent = new Intent(MainActivity.this, MineActivity.class);
                     startActivity(intent);
                     break;
@@ -90,6 +95,7 @@ public class MainActivity extends Activity {
         PushAgent.getInstance(MainActivity.this).setMuteDurationSeconds(3);
         String device_token = UmengRegistrar.getRegistrationId(MainActivity.this);
         Log.e(AppConst.LOG_TAG, device_token);
+        Log.e(AppConst.LOG_TAG, String.valueOf(pushAgent.isEnabled()));
 
         //友盟自动更新
         UmengUpdateAgent.update(this);
@@ -101,7 +107,7 @@ public class MainActivity extends Activity {
 
     private void createItems() {
         actionItems = new ArrayList<Map<String, Object>>(NUM_ACTION);
-        String[] texts = {"扫码", "订单", "个人"};
+        String[] texts = {"扫码", "订单","商城订单", "个人"};
         Map<String, Object> actionItem;
         for (int i = 0; i < NUM_ACTION; i++) {
             actionItem = new HashMap<String, Object>();
